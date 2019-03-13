@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock, Paper, Scissors</title>
+    </head>
+    <body>
+        <script>
+
+                let roundNumber = 1;
+                let playerScore = 0;
+                let computerScore = 0;
+            
+            function computerPlay() {
+                let compChoice = Math.floor(Math.random() *3);
+                switch (compChoice) {
+                    case 0:
+                        return "rock";
+                        break;
+                    case 1:
+                        return "paper";
+                        break;
+                    case 2:
+                        return "scissors";
+                        break;
+                }
+            }
+
+            function playerChoice() {
+                playerSelection = window.prompt("Please choose: Rock, Paper, or Scissors.").toLowerCase();
+                    if (playerSelection != "rock" && playerSelection != "paper" && playerSelection != "scissors") {
+                        window.prompt("Your selection is invalid. Please choose rock, paper, or scissors.").toLowerCase();
+                    }
+                return playerSelection;
+            }
+            
+            
+
+            
+            
+            function playRound() {
+
+                playerSelection = playerChoice();
+                computerSelection = computerPlay();
+
+                let winCon1 = (playerSelection === "rock" && computerSelection === "scissors");
+                let winCon2 = (playerSelection === "paper" && computerSelection === "rock");
+                let winCon3 = (playerSelection === "scissors" && computerSelection === "paper");
+                let winCondition = (winCon1 || winCon2 || winCon3);
+
+                if (playerSelection === computerSelection) {
+                    window.alert("Great minds think alike! This round is a draw.");
+                    return "draw";
+                } 
+                else if (playerSelection !== computerSelection) {
+                    if (winCondition) {
+                        window.alert(`You win: ${playerSelection} beats ${computerSelection}!`);
+                        return "win";
+                    }
+                    else if (!winCondition) {
+                        window.alert(`You lose: ${computerSelection} beats ${playerSelection}.`);
+                        return "lose";
+                    }
+                }
+            }
+
+            function game() {
+
+                while (roundNumber <= 5) {
+                    window.confirm(`The score is Player: ${playerScore} Computer: ${computerScore}. Are you ready for Round ${roundNumber}?`);
+                    let game = playRound();
+                    if (game == "win") {
+                        playerScore++;
+                        roundNumber++;
+                    }
+                    else if (game == "lose") {
+                        computerScore++;
+                        roundNumber++;
+                    }
+                    else if (game == "draw") {
+                        roundNumber++;
+                    }
+                }
+                if (playerScore > computerScore) {
+                    window.alert(`You win with a score of ${playerScore} to ${computerScore}!`);
+                }
+                else if (playerScore < computerScore) {
+                    window.alert(`Bad luck! You lose ${computerScore} to ${playerScore}.`);
+                }
+                else {
+                    window.alert(`${playerScore} to ${computerScore}. This game is a Draw.`);
+                }
+            }
+        </script>
+    </body>
+</html>
